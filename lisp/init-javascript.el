@@ -4,6 +4,8 @@
 
 (maybe-require-package 'json-mode)
 (maybe-require-package 'js2-mode)
+(maybe-require-package 'rjsx-mode)
+(maybe-require-package 'vue-mode)
 (maybe-require-package 'coffee-mode)
 (maybe-require-package 'typescript-mode)
 (maybe-require-package 'prettier-js)
@@ -93,7 +95,13 @@
   (after-load 'typescript-mode
     (add-hook 'typescript-mode-hook 'add-node-modules-path))
   (after-load 'js2-mode
-    (add-hook 'js2-mode-hook 'add-node-modules-path)))
+    (add-hook 'js2-mode-hook 'add-node-modules-path))
+  (after-load 'vue-mode
+    (add-hook 'vue-mode-hook 'add-node-modules-path)))
+
+
+(after-load 'flycheck
+  (flycheck-add-mode 'javascript-eslint 'vue-mode))
 
 
 (provide 'init-javascript)

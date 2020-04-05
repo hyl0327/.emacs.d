@@ -8,6 +8,9 @@
   ;; Shorter modeline
   (setq-default projectile-mode-line-prefix " Proj")
 
+  ;; Prefer git-grep
+  (setq projectile-use-git-grep t)
+
   (after-load 'projectile
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 

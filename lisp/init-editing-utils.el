@@ -87,9 +87,12 @@
 
 
 
-(when (fboundp 'display-line-numbers-mode)
-  (setq-default display-line-numbers-width 3)
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
+(if (fboundp 'display-line-numbers-mode)
+    (progn
+      (setq-default display-line-numbers-width 3)
+      (add-hook 'after-init-hook 'global-display-line-numbers-mode))
+  ;; Fall back to linum-mode for older versions
+  (add-hook 'after-init-hook 'global-linum-mode))
 
 (when (maybe-require-package 'goto-line-preview)
   (global-set-key [remap goto-line] 'goto-line-preview)
@@ -108,6 +111,13 @@
 
 (when (fboundp 'global-prettify-symbols-mode)
   (add-hook 'after-init-hook 'global-prettify-symbols-mode))
+
+
+(require-package 'undo-tree)
+
+(add-hook 'after-init-hook 'global-undo-tree-mode)
+(after-load 'undo-tree
+  (diminish 'undo-tree-mode))
 
 
 (when (maybe-require-package 'symbol-overlay)
@@ -184,8 +194,8 @@
 ;; multiple-cursors
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-+") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-+") 'mc/mark-all-like-this-dwim)
+(global-set-key (kbd "C-c C-+") 'mc/mark-all-like-this)
 ;; From active region to multiple cursors:
 (global-set-key (kbd "C-c m r") 'set-rectangular-region-anchor)
 (global-set-key (kbd "C-c m c") 'mc/edit-lines)
