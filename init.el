@@ -106,6 +106,7 @@
 (require 'init-rails)
 (require 'init-sql)
 (require 'init-rust)
+(require 'init-go)
 (require 'init-toml)
 (require 'init-yaml)
 (require 'init-docker)

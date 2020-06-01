@@ -24,6 +24,7 @@
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
  indent-tabs-mode nil
+ tab-width 4
  create-lockfiles nil
  auto-save-default nil
  make-backup-files nil
